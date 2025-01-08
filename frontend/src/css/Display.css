@@ -1,0 +1,109 @@
+/* Display.css */
+.display-container {
+    background-image: url('../assets/book1.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh; /* Full height for the page */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-attachment: fixed;
+  }
+  
+  .content-container {
+    background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent background */
+    padding: 40px 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 1200px; /* Limit max width */
+    overflow: hidden;
+    animation: fadeIn 2s ease-in-out;
+  }
+  
+  h1 {
+    color: #4c51af;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  .table-container {
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    height: auto;
+  }
+  
+  th, td {
+    padding: 20px 25px; /* Adjusted padding */
+    text-align: left;
+    font-size: 1.1rem; /* Slightly increased font size */
+  }
+  
+  th {
+    background-color: #4c51af;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  tr:nth-child(odd) {
+    background-color: #ffffff;
+  }
+  
+  tr:hover {
+    background-color: #d4f1d4;
+    transform: scale(1.03);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+  }
+  
+  thead th:hover {
+    background-color: #45a049;
+    cursor: pointer;
+  }
+  
+  .table-container {
+    overflow-x: auto;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .content-container {
+      padding: 20px;
+    }
+    
+    th, td {
+      padding: 15px 20px; /* Adjusted padding for small screens */
+    }
+  
+    h1 {
+      font-size: 2.5rem;
+    }
+  }
+  
