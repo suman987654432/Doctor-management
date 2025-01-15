@@ -12,6 +12,7 @@ import Dashbord from "./pages/Dashbord"; // Consider renaming this file to Dashb
 import ResetPass from "./pages/ResetPass";
 import Contact from "./pages/Contact";
 import Product from "./pages/Product";
+import Appointement from "./pages/Appointement ";
 
 const App = () => {
   return (
@@ -26,6 +27,8 @@ const App = () => {
             <Route path="registration" element={<Registration />} />
             <Route path="repass" element={<ResetPass />} />
             <Route path="product" element={<Product />} />
+            <Route path="appointment" element={<Appointement />} />
+            <Route path="search" element={<Search />} />
           </Route>
 
           {/* Dashboard Layout */}
@@ -37,6 +40,7 @@ const App = () => {
             <Route path="update" element={<Update />} />
             <Route path="editdata/:id" element={<EditBook />} />
             <Route path="contact" element={<Contact />} />
+
           </Route>
         </Routes>
       </BrowserRouter>

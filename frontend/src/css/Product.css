@@ -1,52 +1,128 @@
+/* General Container Styling */
 .product-page-container {
-    padding: 20px;
-    text-align: center;
-    background-color: #f8f9fa;
-  }
-  
-  .product-page-container h1 {
-    margin-bottom: 20px;
-    font-size: 2rem;
-    color: #343a40;
-  }
-  
+  padding: 40px;
+  text-align: center;
+  background-color: #f0f4f8;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Heading Styling */
+.product-page-container h1 {
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 40px;
+  font-weight: bold;
+}
+
+/* Grid Layout for Cards */
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+/* Card Styling */
+.product-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 300px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #e0e0e0;
+}
+
+/* Card Hover Effects */
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Image Styling */
+.product-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.1);
+}
+
+/* Card Details */
+.product-details {
+  padding: 20px;
+  background-color: #fff;
+}
+
+.product-details h3 {
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 10px;
+  font-weight: 800;
+}
+
+.product-details p {
+  font-size: 16px;
+  color: #777;
+  margin: 5px 0;
+}
+
+/* Button Styling */
+.book-appointment-btn {
+  display: inline-block;
+  margin-top: 15px;
+  background: linear-gradient(90deg, #00bcd4, #00796b);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+}
+
+.book-appointment-btn:hover {
+  background: linear-gradient(90deg, #00796b, #00bcd4);
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 188, 212, 0.2);
+}
+
+.book-appointment-btn:focus {
+  outline: none;
+  border: none;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
   .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
-    justify-items: center;
   }
-  
+
   .product-card {
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: left;
     width: 100%;
-    max-width: 300px;
+    max-width: 350px;
   }
-  
-  .product-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+}
+
+/* Subtle Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  .product-details {
-    padding: 15px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .product-details h3 {
-    margin: 0 0 10px;
-    font-size: 1.2rem;
-    color: #007bff;
-  }
-  
-  .product-details p {
-    margin: 5px 0;
-    font-size: 0.9rem;
-    color: #6c757d;
-  }
-  
+}
+
+.product-card {
+  animation: fadeIn 0.8s ease-in-out;
+}

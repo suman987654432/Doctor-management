@@ -20,10 +20,13 @@ const TopMenu = () => {
               </Nav.Link>
 
               <Nav.Link as={Link} to="/login" className="nav-link-custom">
-                Log in  
+                Log in
+              </Nav.Link>
+              <Nav.Link as={Link} to="/search" className="nav-link-custom">
+               search
               </Nav.Link>
               <Nav.Link as={Link} to="/product" className="nav-link-custom">
-                Product
+                Doctors
               </Nav.Link>
               <Nav.Link as={Link} to="/registration" className="nav-link-custom">
                 SignUp

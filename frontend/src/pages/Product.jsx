@@ -1,46 +1,59 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "../css/Product.css";
 
 const ProductPage = () => {
-    const [products, setProducts] = useState([]);
+  const [doctors, setDoctors] = useState([]);
+  const navigate = useNavigate();
 
-    // Fetch all product data from the API
-    const loadProducts = () => {
-        const api = "https://book-management-system-4kpp.onrender.com/books/datadisplay";
-        axios.get(api).then((res) => {
-            setProducts(res.data);
-        });
-    };
+  // Fetch all doctor data from the API
+  const loadDoctors = () => {
+    const api = "http://localhost:9000/doctors/datadisplay";
+    axios.get(api).then((res) => {
+      setDoctors(res.data);
+    });
+  };
 
-    useEffect(() => {
-        loadProducts();
-    }, []);
+  useEffect(() => {
+    loadDoctors();
+  }, []);
 
-    return (
-        <div className="product-page-container">
-            <h1>Our Products</h1>
-            <div className="product-grid">
-                {products.map((product) => (
-                    <div className="product-card" key={product._id}>
-                        {product.image && (
-                            <img
-                                src={`data:image/png;base64,${product.image}`}
-                                alt={product.book_title}
-                                className="product-image"
-                            />
-                        )}
-                        <div className="product-details">
-                            <h3>{product.book_title}</h3>
-                            <p><strong>Author:</strong> {product.author_name}</p>
-                            <p><strong>Publish Year:</strong> {new Date(product.publish_year).toLocaleDateString()}</p>
-                            <p><strong>Price:</strong> ₹{product.price}</p>
-                        </div>
-                    </div>
-                ))}
+  const bookAppointment = (doctor) => {
+    // Navigate to appointment page and pass doctor data as state
+    navigate("/appointment", { state: { doctor } });
+  };
+
+  return (
+    <div className="product-page-container">
+      <h1>Our Doctors</h1>
+      <div className="product-grid">
+        {doctors.map((doctor) => (
+          <div className="product-card" key={doctor._id}>
+            {doctor.image && (
+              <img
+                src={`data:image/png;base64,${doctor.image}`}
+                alt={doctor.doctor_name}
+                className="product-image"
+              />
+            )}
+            <div className="product-details">
+              <h3>{doctor.doctor_name}</h3>
+              <p><strong>Specialist:</strong> {doctor.specialist}</p>
+              <p><strong>Date:</strong> {new Date(doctor.date).toLocaleDateString()}</p>
+              <p><strong>Fee:</strong> ₹{doctor.fee}</p>
             </div>
-        </div>
-    );
+            <button
+              className="book-appointment-btn"
+              onClick={() => bookAppointment(doctor)}
+            >
+              Book Appointment
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default ProductPage;

@@ -6,10 +6,10 @@ import "../css/Insert.css";
 
 const Insert = () => {
   const [input, setInput] = useState({
-    author_name: "",
-    book_title: "",
-    publish_year: "",
-    price: "",
+    doctor_name: "",
+    specialist: "",
+    fee: "",
+    date: "",
   });
   const [image, setImage] = useState(null);
 
@@ -19,68 +19,70 @@ const Insert = () => {
   };
 
   const handleImage = (e) => {
-    setImage(e.target.files[0]); // Store the selected image file
+    setImage(e.target.files[0]); // Capture the uploaded image
   };
 
   const handleSubmit = async () => {
     const formData = new FormData();
-    formData.append("author_name", input.author_name);
-    formData.append("book_title", input.book_title);
-    formData.append("publish_year", input.publish_year);
-    formData.append("price", input.price);
-    formData.append("image", image); // Append the image file
+    formData.append("doctor_name", input.doctor_name);
+    formData.append("specialist", input.specialist);
+    formData.append("fee", input.fee);
+    formData.append("date", input.date);
+    formData.append("image", image); // Attach the image file
 
     try {
-      const api = "https://book-management-system-4kpp.onrender.com/books/datasave";
+      const api = "http://localhost:9000/doctors/datasave";
       await axios.post(api, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      alert("Data saved successfully");
+      alert("Doctor saved successfully");
     } catch (error) {
-      alert("Error saving data: " + error.message);
+      alert("Error saving doctor: " + error.message);
     }
   };
 
   return (
     <div className="insert-container">
       <div className="form-container">
-        <h1 className="title">Insert Book</h1>
+        <h1 className="title">Insert Doctor</h1>
         <Form className="insert-form">
           <Form.Group className="mb-3">
-            <Form.Label>Author Name</Form.Label>
+            <Form.Label>Doctor Name</Form.Label>
             <Form.Control
               type="text"
-              name="author_name"
-              value={input.author_name}
+              name="doctor_name"
+              value={input.doctor_name}
               onChange={handleInput}
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Book Title</Form.Label>
+            <Form.Label>Specialist</Form.Label>
             <Form.Control
               type="text"
-              name="book_title"
-              value={input.book_title}
+              name="specialist"
+              value={input.specialist}
               onChange={handleInput}
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Publish Year</Form.Label>
-            <Form.Control
-              type="date"
-              name="publish_year"
-              value={input.publish_year}
-              onChange={handleInput}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Price</Form.Label>
+            <Form.Label>Fee</Form.Label>
             <Form.Control
               type="number"
-              name="price"
-              value={input.price}
+              name="fee"
+              value={input.fee}
+              onChange={handleInput}
+              min="0"
+              max="5000"
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Date</Form.Label>
+            <Form.Control
+              type="date"
+              name="date"
+              value={input.date}
               onChange={handleInput}
             />
           </Form.Group>

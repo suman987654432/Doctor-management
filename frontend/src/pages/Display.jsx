@@ -1,17 +1,21 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
+import del from "../assets/del.png";
 import { formatDate } from "../../utils";
-import "../css/Display.css";
-import { Outlet } from "react-router-dom";
+import edit from "../assets/edit.png";
+import { useNavigate } from "react-router-dom";
+import "../css/Update.css"; // Import the updated CSS file
 
-const Display = () => {
-  const [mydata, setMydata] = useState([]);
+const Update = () => {
+  const [doctors, setDoctors] = useState([]);
+  const navigate = useNavigate();
 
   const loadData = () => {
-    const api = "https://book-management-system-4kpp.onrender.com/books/datadisplay";
+    const api = "http://localhost:9000/doctors/datadisplay";
     axios.get(api).then((res) => {
-      setMydata(res.data);
+      console.log(res.data);
+      setDoctors(res.data);
     });
   };
 
@@ -19,46 +23,74 @@ const Display = () => {
     loadData();
   }, []);
 
-  const ans = mydata.map((key) => {
-    return (
-      <tr key={key._id}>
-        <td>{key.author_name}</td>
-        <td>{key.book_title}</td>
-        <td>{formatDate(key.publish_year)}</td>
-        <td>{key.price}</td>
-        <td>
-          {key.image && (
-            <img
-              src={`data:image/png;base64,${key.image}`}
-              alt={key.book_title}
-              style={{ width: "100px", height: "auto" }}
-            />
-          )}
-        </td>
-      </tr>
-    );
-  });
+  const deleteDoctor = (id) => {
+    const api = "http://localhost:9000/doctors/datadelete";
+    axios.post(api, { id }).then((res) => {
+      alert("Doctor data deleted successfully");
+      loadData();
+    });
+  };
+
+  const doctorRows = doctors.map((doctor) => (
+    <tr key={doctor._id}>
+      <td>{doctor.doctor_name}</td>
+      <td>{doctor.specialist}</td>
+      <td>{formatDate(doctor.date)}</td>
+      <td>{doctor.fee}</td>
+      <td>
+        {doctor.image && (
+          <img
+            src={`data:image/png;base64,${doctor.image}`}
+            alt={doctor.doctor_name}
+            style={{ width: "100px", height: "auto" }}
+          />
+        )}
+      </td>
+      <td>
+        <a
+          href="#"
+          onClick={() => {
+            navigate("/dashboard/editdata/:id");
+          }}
+        >
+          <img src={edit} className="imgsize" alt="Edit" />
+        </a>
+      </td>
+      <td>
+        <a
+          href="#"
+          onClick={() => {
+            deleteDoctor(doctor._id);
+          }}
+        >
+          <img src={del} className="imgsize" alt="Delete" />
+        </a>
+      </td>
+    </tr>
+  ));
+
 
   return (
-    <div className="display-container">
-      <div className="content-container">
-        <h1>Display Data</h1>
-        <Table striped bordered hover responsive="sm">
+    <div className="update-container">
+      <h1>Doctors Management</h1>
+      <div className="table-container">
+        <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Author Name</th>
-              <th>Book Title</th>
-              <th>Publish Year</th>
-              <th>Price</th>
+              <th>Name</th>
+              <th>Specialist</th>
+              <th>Date</th>
+              <th>Fee</th>
               <th>Image</th>
+              <th>Edit</th>
+              <th>Delete</th>
             </tr>
           </thead>
-          <tbody>{ans}</tbody>
+          <tbody>{doctorRows}</tbody>
         </Table>
-        <Outlet />
       </div>
     </div>
   );
 };
 
-export default Display;
+export default Update;

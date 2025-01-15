@@ -8,76 +8,103 @@ import { useNavigate } from "react-router-dom";
 import "../css/Update.css"; // Import the updated CSS file
 
 const Update = () => {
-  const [mydata, setMydata] = useState([]);
+  const [doctors, setDoctors] = useState([]); // State to hold doctor data
   const navigate = useNavigate();
 
-  const loadData = () => {
-    let api = "https://book-management-system-4kpp.onrender.com/books/datadisplay";
-    axios.get(api).then((res) => {
-      console.log(res.data);
-      setMydata(res.data);
-    });
+  // Function to fetch all doctor data from the server
+  const loadData = async () => {
+    try {
+      const api = "http://localhost:9000/doctors/datadisplay";
+      const response = await axios.get(api);
+      setDoctors(response.data); // Set the fetched data into state
+    } catch (error) {
+      console.error("Error fetching doctor data:", error);
+    }
   };
 
+  // Fetch data on component mount
   useEffect(() => {
     loadData();
   }, []);
 
-  const myDel = (id) => {
-    let api = "https://book-management-system-4kpp.onrender.com/books/datadelete";
-    axios.post(api, { id: id }).then((res) => {
-      alert("data deleted");
-      loadData();
-    });
+  // Function to handle deletion of doctor data
+  const deleteDoctor = async (id) => {
+    try {
+      const api = "http://localhost:9000/doctors/datadelete";
+      await axios.post(api, { id });
+      alert("Doctor data deleted successfully");
+      loadData(); // Reload data after deletion
+    } catch (error) {
+      console.error("Error deleting doctor data:", error);
+    }
   };
 
-  const ans = mydata.map((key) => {
-    return (
-      <tr key={key._id}>
-        <td>{key.author_name}</td>
-        <td>{key.book_title}</td>
-        <td>{formatDate(key.publish_year)}</td>
-        <td>{key.price}</td>
-        <td>
-          <a
-            href="#"
-            onClick={() => {
-              navigate(`/dashboard/editdata/${key._id}`);
-            }}
-          >
-            <img src={edit} className="imgsize" alt="Edit" />
-          </a>
-        </td>
-        <td>
-          <a
-            href="#"
-            onClick={() => {
-              myDel(key._id);
-            }}
-          >
-            <img src={del} className="imgsize" alt="Delete" />
-          </a>
-        </td>
-      </tr>
-    );
-  });
+  // Generate table rows dynamically based on the `doctors` data
+  const doctorRows = doctors.map((doctor) => (
+    <tr key={doctor._id}>
+      <td>{doctor.doctor_name}</td>
+      <td>{doctor.specialist}</td>
+      <td>{doctor.date ? formatDate(doctor.date) : "N/A"}</td>
+      <td>{doctor.fee ? `₹${doctor.fee}` : "N/A"}</td>
+      <td>
+        {doctor.image ? (
+          <img
+            src={`data:image/png;base64,${doctor.image}`}
+            alt={doctor.doctor_name}
+            style={{ width: "100px", height: "auto" }}
+          />
+        ) : (
+          "No Image"
+        )}
+      </td>
+      <td>
+        <a
+          href="#"
+          onClick={() => {
+            navigate(`/dashboard/editdata/:id`);
+          }}
+        >
+          <img src={edit} className="imgsize" alt="Edit" />
+        </a>
+      </td>
+      <td>
+        <a
+          href="#"
+          onClick={() => {
+            deleteDoctor(doctor._id);
+          }}
+        >
+          <img src={del} className="imgsize" alt="Delete" />
+        </a>
+      </td>
+    </tr>
+  ));
 
   return (
     <div className="update-container">
-      <h1>Display page</h1>
+      <h1>Doctors Management</h1>
       <div className="table-container">
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Author Name</th>
-              <th>Book Title</th>
-              <th>Publish Year</th>
-              <th>Price</th>
+              <th>Name</th>
+              <th>Specialist</th>
+              <th>Date</th>
+              <th>Fee</th>
+              <th>Image</th>
               <th>Edit</th>
               <th>Delete</th>
             </tr>
           </thead>
-          <tbody>{ans}</tbody>
+          <tbody>
+            {doctorRows.length > 0 ? doctorRows : (
+              <tr>
+                <td colSpan="7" style={{ textAlign: "center" }}>
+                  No doctors available
+                </td>
+              </tr>
+            )}
+          </tbody>
         </Table>
       </div>
     </div>

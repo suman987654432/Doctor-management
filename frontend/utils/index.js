@@ -1,8 +1,19 @@
 import { format } from "date-fns";
 
 export const formatDate = (date) => {
-  // Ensure `date` is a valid Date object
-  const formattedDate = format(new Date(date), "dd-MM-yyyy");
+  try {
+    // Validate the `date` input
+    const parsedDate = new Date(date);
 
-  return formattedDate;
+    // Check if the date is valid
+    if (isNaN(parsedDate.getTime())) {
+      return "Invalid Date"; // Fallback for invalid date
+    }
+
+    // Format the valid date
+    return format(parsedDate, "dd-MM-yyyy");
+  } catch (error) {
+    console.error("Error formatting date:", error);
+    return "Invalid Date"; // Fallback for unexpected errors
+  }
 };

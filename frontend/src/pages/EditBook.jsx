@@ -1,80 +1,114 @@
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import "../css/edit.css";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import "../css/edit.css"; // Your custom styles
+
 const EditBook = () => {
-  const { id } = useParams();
+  const { id } = useParams(); // Get the doctor ID from URL params
   const [image, setImage] = useState(null);
   const [input, setInput] = useState({});
   const navigate = useNavigate();
+
+  // Function to load doctor data based on ID
   const loadData = () => {
-    let api = "https://book-management-system-4kpp.onrender.com/books/editdatadisplay";
-    axios.post(api, { id: id }).then((res) => {
-      setInput(res.data);
-    });
-  }
-
-  useEffect(() => {
-    loadData();
-  }, []);
-
-  const handleInput = (e) => {
-    let name = e.target.name;
-    let value = e.target.value;
-    setInput(values => ({ ...values, [name]: value }));
-    console.log(input);
-  }
-  const handleSubmit = () => {
-    const formData = new FormData();
-
-    formData.append("_id", id);
-    formData.append("author_name", input.author_name);
-    formData.append("book_title", input.book_title);
-    formData.append("publish_year", input.publish_year);
-    formData.append("price", input.price);
-    if (image) formData.append("image", image);
-
-    axios.post("https://book-management-system-4kpp.onrender.com/books/editdatasave", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    }).then((res) => {
-      alert("Updated data successfully");
-      navigate("/dashboard/update");
-    }).catch((error) => {
-      console.error("Error updating book:", error);
-    });
+    const api = "http://localhost:9000/doctors/editdatadisplay";
+    axios
+      .post(api, { id })
+      .then((res) => {
+        setInput(res.data); // Populate form fields with doctor data
+      })
+      .catch((error) => {
+        console.error("Error fetching doctor data:", error);
+      });
   };
 
+  useEffect(() => {
+    loadData(); // Load doctor data when component mounts or ID changes
+  }, [id]);
 
+  // Handle form input changes
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setInput((values) => ({ ...values, [name]: value }));
+  };
+
+  // Handle form submission to update doctor data
+  const handleSubmit = () => {
+    const formData = new FormData();
+    formData.append("_id", id); // Ensure the correct doctor ID is included
+    formData.append("doctor_name", input.doctor_name);
+    formData.append("specialist", input.specialist);
+    formData.append("fee", input.fee);
+    formData.append("date", input.date);
+
+    // If image is selected, append it to the form data
+    if (image) formData.append("image", image);
+
+    axios
+      .post("http://localhost:9000/doctors/editdatasave", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then(() => {
+        alert("Doctor data updated successfully");
+        navigate("/dashboard/update"); // Redirect to update page after successful submission
+      })
+      .catch((error) => {
+        console.error("Error updating doctor data:", error);
+      });
+  };
+
+  // Handle image file selection
   const handleImage = (e) => {
     setImage(e.target.files[0]); // Store the selected image file
   };
+
   return (
     <div className="edit-container">
       <div className="edit-form-container">
-        <h1>Edit Book Data</h1>
+        <h1>Edit Doctor Data</h1>
         <Form>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Author name</Form.Label>
-            <Form.Control type="text" name="author_name"
-              value={input.author_name} onChange={handleInput} />
+          <Form.Group className="mb-3">
+            <Form.Label>Doctor Name</Form.Label>
+            <Form.Control
+              type="text"
+              name="doctor_name"
+              value={input.doctor_name || ""}
+              onChange={handleInput}
+            />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Book Title</Form.Label>
-            <Form.Control type="text" name="book_title"
-              value={input.book_title} onChange={handleInput} />
+
+          <Form.Group className="mb-3">
+            <Form.Label>Specialist</Form.Label>
+            <Form.Control
+              type="text"
+              name="specialist"
+              value={input.specialist || ""}
+              onChange={handleInput}
+            />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Publish Year</Form.Label>
-            <Form.Control type="date" name="publish_year"
-              value={input.publish_year} onChange={handleInput} />
+
+          <Form.Group className="mb-3">
+            <Form.Label>Fee</Form.Label>
+            <Form.Control
+              type="number"
+              name="fee"
+              value={input.fee || ""}
+              onChange={handleInput}
+            />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Enter Price</Form.Label>
-            <Form.Control type="number" name="price"
-              value={input.price} onChange={handleInput} />
+
+          <Form.Group className="mb-3">
+            <Form.Label>Date</Form.Label>
+            <Form.Control
+              type="date"
+              name="date"
+              value={input.date || ""}
+              onChange={handleInput}
+            />
           </Form.Group>
+
           <Form.Group className="mb-3">
             <Form.Label>Image</Form.Label>
             <Form.Control
@@ -83,6 +117,7 @@ const EditBook = () => {
               onChange={handleImage}
             />
           </Form.Group>
+
           <Button variant="primary" type="button" onClick={handleSubmit}>
             Submit
           </Button>
@@ -90,6 +125,6 @@ const EditBook = () => {
       </div>
     </div>
   );
-}
+};
 
 export default EditBook;

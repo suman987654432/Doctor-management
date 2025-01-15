@@ -20,7 +20,7 @@ app.use(bodyparser.json());
 
 // Routes
 const UserRoute = require("./routes/UserRoute");
-app.use("/books", bookRoute);
+app.use("/doctors", bookRoute);
 app.use("/user", UserRoute);
 
 // Default route
