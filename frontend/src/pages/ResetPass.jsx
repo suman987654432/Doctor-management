@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { message } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import '../css/ResetPassword.css'; 
+import '../css/ResetPassword.css';
 
 const ResetPassword = () => {
     const [input, setInput] = useState({});
@@ -28,7 +28,7 @@ const ResetPassword = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const api = "http://localhost:9000/user/passwordchange";
+        const api = "https://book-management-system-4kpp.onrender.com/user/passwordchange";
         try {
             await axios.post(api, { userid, ...input });
             message.success("Password successfully changed!");

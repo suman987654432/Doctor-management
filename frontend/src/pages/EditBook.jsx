@@ -10,7 +10,7 @@ const EditBook = () => {
   const [input, setInput] = useState({});
   const navigate = useNavigate();
   const loadData = () => {
-    let api = "http://localhost:9000/books/editdatadisplay";
+    let api = "https://book-management-system-4kpp.onrender.com/books/editdatadisplay";
     axios.post(api, { id: id }).then((res) => {
       setInput(res.data);
     });
@@ -28,7 +28,7 @@ const EditBook = () => {
   }
   const handleSubmit = () => {
     const formData = new FormData();
-    
+
     formData.append("_id", id);
     formData.append("author_name", input.author_name);
     formData.append("book_title", input.book_title);
@@ -36,7 +36,7 @@ const EditBook = () => {
     formData.append("price", input.price);
     if (image) formData.append("image", image);
 
-    axios.post("http://localhost:9000/books/editdatasave", formData, {
+    axios.post("https://book-management-system-4kpp.onrender.com/books/editdatasave", formData, {
       headers: { "Content-Type": "multipart/form-data" },
     }).then((res) => {
       alert("Updated data successfully");

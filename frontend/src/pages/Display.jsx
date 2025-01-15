@@ -9,7 +9,7 @@ const Display = () => {
   const [mydata, setMydata] = useState([]);
 
   const loadData = () => {
-    const api = "http://localhost:9000/books/datadisplay";
+    const api = "https://book-management-system-4kpp.onrender.com/books/datadisplay";
     axios.get(api).then((res) => {
       setMydata(res.data);
     });
