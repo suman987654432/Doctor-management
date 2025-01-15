@@ -14,6 +14,9 @@ app.use(bodyparser.json());
 const UserRoute = require("./routes/UserRoute")
 app.use("/books", bookRoute);
 app.use("/user", UserRoute)
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
 app.listen(port, () => {
   console.log(`Server run on ${port}`);
 });
