@@ -1,6 +1,8 @@
 import { format } from "date-fns";
+
 export const formatDate = (date) => {
-  const formattedDate = format(`${date}`, "dd-MM-yyyy");
+  // Ensure `date` is a valid Date object
+  const formattedDate = format(new Date(date), "dd-MM-yyyy");
 
   return formattedDate;
 };

@@ -1,0 +1,82 @@
+/* Keyframes for fade-in effect */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Keyframes for button hover effect */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Container styling */
+.registration-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    background: linear-gradient(135deg, #e4daed 0%, #2575fc 100%);
+    color: white;
+    animation: fadeIn 1s ease-in-out;
+    padding: 20px;
+}
+
+/* Title styling */
+.registration-title {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Form styling */
+.registration-form {
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #333;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Button styling */
+.registration-button {
+    width: 100%;
+    background-color: #2575fc;
+    border: none;
+    font-size: 16px;
+    padding: 10px;
+    margin-top: 15px;
+    transition: background-color 0.3s ease-in-out, transform 0.2s;
+    animation: pulse 1.5s infinite;
+}
+
+.registration-button:hover {
+    background-color: #6a11cb;
+    transform: scale(1.05);
+}
+
+/* Input field styling */
+.registration-form .form-control {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.registration-form .form-control:focus {
+    border-color: #2575fc;
+    box-shadow: 0 0 5px rgba(37, 117, 252, 0.5);
+}

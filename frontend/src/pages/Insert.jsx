@@ -5,18 +5,42 @@ import axios from "axios";
 import "../css/Insert.css";
 
 const Insert = () => {
-  const [input, setInput] = useState({});
+  const [input, setInput] = useState({
+    author_name: "",
+    book_title: "",
+    publish_year: "",
+    price: "",
+  });
+  const [image, setImage] = useState(null);
+
   const handleInput = (e) => {
-    let name = e.target.name;
-    let value = e.target.value;
+    const { name, value } = e.target;
     setInput((values) => ({ ...values, [name]: value }));
   };
 
-  const handleSubmit = () => {
-    let api = "http://localhost:9000/books/datasave";
-    axios.post(api, input).then((res) => {
+  const handleImage = (e) => {
+    setImage(e.target.files[0]); // Store the selected image file
+  };
+
+  const handleSubmit = async () => {
+    const formData = new FormData();
+    formData.append("author_name", input.author_name);
+    formData.append("book_title", input.book_title);
+    formData.append("publish_year", input.publish_year);
+    formData.append("price", input.price);
+    formData.append("image", image); // Append the image file
+
+    try {
+      const api = "http://localhost:9000/books/datasave";
+      await axios.post(api, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       alert("Data saved successfully");
-    });
+    } catch (error) {
+      alert("Error saving data: " + error.message);
+    }
   };
 
   return (
@@ -28,46 +52,49 @@ const Insert = () => {
             <Form.Label>Author Name</Form.Label>
             <Form.Control
               type="text"
-              name="authorname"
-              value={input.authorname}
+              name="author_name"
+              value={input.author_name}
               onChange={handleInput}
-              className="form-control"
             />
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Book Title</Form.Label>
             <Form.Control
               type="text"
-              name="booktitle"
-              value={input.booktitle}
+              name="book_title"
+              value={input.book_title}
               onChange={handleInput}
-              className="form-control"
             />
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Publish Year</Form.Label>
             <Form.Control
               type="date"
-              name="publishdate"
-              value={input.publishdate}
+              name="publish_year"
+              value={input.publish_year}
               onChange={handleInput}
-              className="form-control"
             />
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Price</Form.Label>
             <Form.Control
               type="number"
-              name="bookprice"
-              value={input.bookprice}
+              name="price"
+              value={input.price}
               onChange={handleInput}
-              className="form-control"
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Image</Form.Label>
+            <Form.Control
+              type="file"
+              name="image"
+              onChange={handleImage}
             />
           </Form.Group>
           <Button
             variant="primary"
             type="button"
-            className="submit-btn"
             onClick={handleSubmit}
           >
             Submit

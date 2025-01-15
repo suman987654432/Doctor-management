@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
 import { formatDate } from "../../utils";
-import '../css/Display.css';  // Import the CSS file
+import "../css/Display.css";
+import { Outlet } from "react-router-dom";
 
 const Display = () => {
   const [mydata, setMydata] = useState([]);
 
   const loadData = () => {
-    let api = "http://localhost:9000/books/datadisplay";
+    const api = "http://localhost:9000/books/datadisplay";
     axios.get(api).then((res) => {
       setMydata(res.data);
     });
@@ -20,11 +21,20 @@ const Display = () => {
 
   const ans = mydata.map((key) => {
     return (
-      <tr key={key.id}>
+      <tr key={key._id}>
         <td>{key.author_name}</td>
         <td>{key.book_title}</td>
         <td>{formatDate(key.publish_year)}</td>
         <td>{key.price}</td>
+        <td>
+          {key.image && (
+            <img
+              src={`data:image/png;base64,${key.image}`}
+              alt={key.book_title}
+              style={{ width: "100px", height: "auto" }}
+            />
+          )}
+        </td>
       </tr>
     );
   });
@@ -40,10 +50,12 @@ const Display = () => {
               <th>Book Title</th>
               <th>Publish Year</th>
               <th>Price</th>
+              <th>Image</th>
             </tr>
           </thead>
           <tbody>{ans}</tbody>
         </Table>
+        <Outlet />
       </div>
     </div>
   );

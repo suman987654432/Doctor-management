@@ -5,14 +5,14 @@ import "../css/Search.css"; // Import the updated CSS file
 const Search = () => {
   const [book, setBook] = useState("");
   const [mydata, setMydata] = useState([]);
-  
+
   const handleSubmit = () => {
     let api = "http://localhost:9000/books/datasearch";
     axios.post(api, { book: book }).then((res) => {
       setMydata(res.data);
     });
   };
-  
+
   const ans = mydata.map((key) => {
     return (
       <tr key={key._id}>
@@ -47,7 +47,7 @@ const Search = () => {
               <th>Price</th>
             </tr>
           </thead>
-          <tbody>{ans}</tbody>
+          <tbody style={{ color: "red" }}>{ans}</tbody>
         </table>
       ) : (
         <p style={{ textAlign: "center", color: "#4c51af", fontSize: "1.2rem" }}>

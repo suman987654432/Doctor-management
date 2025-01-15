@@ -7,12 +7,13 @@ import Footer from "./component/Footer";
 const Layout = () => {
   return (
     <>
- 
-    <TopMenu/>
+
+      <TopMenu />
       <Header />
       <div id="container">
         <Outlet />
       </div>
+
       <Footer />
     </>
   );

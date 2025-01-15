@@ -1,111 +1,152 @@
 /* Search.css */
 .search-container {
-    background-color: rgba(0, 0, 0, 0.05);
-    padding: 40px 20px;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-    margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 40px 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+  animation: slideIn 1s ease-out;
+}
+
+h1 {
+  color: #4c51af;
+  text-align: center;
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
   }
-  
-  h1 {
-    color: #4c51af;
-    text-align: center;
-    font-size: 2.8rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-    animation: fadeIn 1s ease-in-out;
+  100% {
+    opacity: 1;
   }
-  
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
   }
-  
-  .input-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 30px;
+  100% {
+    transform: translateX(0);
   }
-  
-  input[type="text"] {
-    padding: 12px 20px;
-    width: 300px;
-    font-size: 1rem;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    outline: none;
-    transition: border-color 0.3s ease;
+}
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+input[type="text"] {
+  padding: 12px 20px;
+  width: 300px;
+  font-size: rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+input[type="text"]:focus {
+  border-color: #4c51af;
+  transform: scale(1.05);
+}
+
+button {
+  padding: 12px 20px;
+  margin-left: 10px;
+  background-color: #4c51af;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+  background-color: #3a44ab;
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(1);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  animation: fadeInTable 1.5s ease-in-out;
+}
+
+@keyframes fadeInTable {
+  0% {
+    opacity: 0;
   }
-  
-  input[type="text"]:focus {
-    border-color: #4c51af;
+  100% {
+    opacity: 1;
   }
-  
-  button {
-    padding: 12px 20px;
-    margin-left: 10px;
-    background-color: #4c51af;
-    color: white;
-    font-size: 1rem;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+th, td {
+  padding: 12px 20px;
+  text-align: left;
+  font-size: 1.1rem;
+  border: 1px solid #ddd;
+  transition: background-color 0.3s ease;
+}
+
+th {
+  background-color: #4c51af;
+  color: rgb(249, 244, 244);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: inset 0 -2px 0 #3a44ab;
+}
+
+th:hover {
+  background-color: #45a049;
+  cursor: pointer;
+}
+
+tr:nth-child(even) {
+  background-color: #f8f8f8;
+}
+
+tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+tr:hover {
+  background-color: #d4f1d4;
+  transform: scale(1.03);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+table, th, td {
+  border-radius: 10px;
+  box-shadow: inset 0 -1px 0 #ddd;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .search-container {
+    padding: 20px;
   }
-  
-  button:hover {
-    background-color: #3a44ab;
-    transform: scale(1.05);
-  }
-  
-  table {
+
+  input[type="text"], button {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    animation: fadeIn 2s ease-in-out;
-  }
-  
-  th, td {
-    padding: 12px 20px;
-    text-align: left;
+    padding: 12px;
     font-size: 1.1rem;
   }
-  
-  th {
-    background-color: #4c51af;
-    color: white;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+
+  h1 {
+    font-size: 2.2rem;
   }
-  
-  tr:nth-child(even) {
-    background-color: #f8f8f8;
-  }
-  
-  tr:nth-child(odd) {
-    background-color: #ffffff;
-  }
-  
-  tr:hover {
-    background-color: #d4f1d4;
-    transform: scale(1.03);
-    transition: background-color 0.3s ease, transform 0.3s ease;
-  }
-  
-  table, th, td {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-  }
-  
-  @media (max-width: 768px) {
-    input[type="text"], button {
-      width: 100%;
-      padding: 12px;
-    }
-  }
-  
+}

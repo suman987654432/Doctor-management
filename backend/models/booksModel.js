@@ -1,12 +1,13 @@
 const mongoose = require("mongoose");
+
 const bookSchema = new mongoose.Schema({
   author_name: {
     type: String,
-    require: true,
+    required: true,
   },
   book_title: {
     type: String,
-    require: true,
+    required: true,
   },
   publish_year: {
     type: Date,
@@ -18,5 +19,10 @@ const bookSchema = new mongoose.Schema({
     max: 5000,
     required: true,
   },
+  image: {
+    type: Buffer, // To store the binary image data
+    required: true,
+  },
 });
+
 module.exports = mongoose.model("book", bookSchema);

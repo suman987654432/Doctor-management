@@ -1,101 +1,136 @@
-/* Insert.css */
-
 .insert-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
-    
-    background-image: url('../assets/book4.jpg');
-    background-size: cover;
-    background-position: center;
-    animation: fadeIn 1s ease-in-out;
-  }
-  
-  .form-container {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 500px;
-    animation: slideUp 1s ease-in-out;
-  }
-  
-  .title {
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #ff5722;
-    margin-bottom: 20px;
-    animation: fadeInTitle 1.5s ease-in-out;
-  }
-  
-  .insert-form .form-control {
-    border-radius: 4px;
-    margin-bottom: 15px;
-    padding: 10px;
-    font-size: 1rem;
-  }
-  
-  .submit-btn {
-    width: 100%;
-    padding: 10px;
-    font-size: 1.2rem;
-    border-radius: 4px;
-    background-color: #ff5722;
-    border: none;
-    color: #fff;
-    transition: background-color 0.3s ease;
-  }
-  
-  .submit-btn:hover {
-    background-color: #e64a19;
-  }
-  
-  /* Animations */
-  @keyframes fadeIn {
-    from {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  background-image: url('../assets/book4.jpg'); /* Your background image */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  animation: fadeIn 1s ease-in-out;
+  position: relative;
+}
+
+.insert-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  z-index: -1;
+  animation: fadeInOverlay 1s ease-in-out;
+}
+
+.form-container {
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 600px;
+  animation: slideUp 1s ease-in-out;
+  backdrop-filter: blur(15px); /* Applies blur effect to the background */
+}
+
+.title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #ff5722;
+  margin-bottom: 20px;
+  animation: fadeInTitle 1.5s ease-in-out;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Title shadow for better visibility */
+}
+
+.insert-form .form-control {
+  width: 100%; /* Ensures the input fields take full width of their container */
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 15px; /* Increased padding for better appearance */
+  font-size: 1.1rem; /* Slightly larger font size */
+  border: 2px solid #ccc;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-sizing: border-box; /* Prevents padding from affecting width */
+}
+
+.insert-form .form-control:focus {
+  border-color: #ff5722; /* Focus color for better visibility */
+  box-shadow: 0 0 10px rgba(255, 87, 34, 0.5);
+  outline: none; /* Removes default outline */
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  background-color: #ff5722;
+  border: none;
+  color: #fff;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #e64a19;
+  transform: translateY(-3px); /* Lift on hover */
+}
+
+.submit-btn:active {
+  transform: translateY(1px); /* Press effect */
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
       opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
   }
-  
-  @keyframes slideUp {
-    from {
+  to {
+      opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
       transform: translateY(20px);
       opacity: 0;
-    }
-    to {
+  }
+  to {
       transform: translateY(0);
       opacity: 1;
-    }
   }
-  
-  @keyframes fadeInTitle {
-    from {
+}
+
+@keyframes fadeInTitle {
+  from {
       opacity: 0;
-    }
-    to {
+  }
+  to {
       opacity: 1;
-    }
   }
-  
-  /* Mobile responsiveness */
-  @media (max-width: 768px) {
-    .form-container {
-      padding: 20px;
+}
+
+@keyframes fadeInOverlay {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .form-container {
+      padding: 25px;
       width: 90%;
-    }
-  
-    .title {
-      font-size: 2rem;
-    }
-  
-    .submit-btn {
-      font-size: 1rem;
-    }
   }
-  
+
+  .title {
+      font-size: 2rem;
+  }
+
+  .submit-btn {
+      font-size: 1rem;
+  }
+}

@@ -3,6 +3,7 @@ import axios from "axios";
 import Table from "react-bootstrap/Table";
 import del from "../assets/del.png";
 import edit from "../assets/edit.png";
+import { formatDate } from "../../utils";
 import { useNavigate } from "react-router-dom";
 import "../css/Update.css"; // Import the updated CSS file
 
@@ -35,13 +36,13 @@ const Update = () => {
       <tr key={key._id}>
         <td>{key.author_name}</td>
         <td>{key.book_title}</td>
-        <td>{key.publish_year}</td>
+        <td>{formatDate(key.publish_year)}</td>
         <td>{key.price}</td>
         <td>
           <a
             href="#"
             onClick={() => {
-              navigate(`/editdata/${key._id}`);
+              navigate(`/dashboard/editdata/${key._id}`);
             }}
           >
             <img src={edit} className="imgsize" alt="Edit" />

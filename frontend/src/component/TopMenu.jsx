@@ -18,20 +18,15 @@ const TopMenu = () => {
               <Nav.Link as={Link} to="/home" className="nav-link-custom">
                 Home
               </Nav.Link>
-              <Nav.Link as={Link} to="insert" className="nav-link-custom">
-                Insert
+
+              <Nav.Link as={Link} to="/login" className="nav-link-custom">
+                Log in  
               </Nav.Link>
-              <Nav.Link as={Link} to="/display" className="nav-link-custom">
-                Display
+              <Nav.Link as={Link} to="/product" className="nav-link-custom">
+                Product
               </Nav.Link>
-              <Nav.Link as={Link} to="/search" className="nav-link-custom">
-                Search
-              </Nav.Link>
-              <Nav.Link as={Link} to="/update" className="nav-link-custom">
-                Update
-              </Nav.Link>
-              <Nav.Link as={Link} to="/contact" className="nav-link-custom">
-                Contact
+              <Nav.Link as={Link} to="/registration" className="nav-link-custom">
+                SignUp
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
