@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="footer-container">
       <div className="footer-content">
         <div className="footer-section">
-          <h5>BOOK SELL</h5>
+          <h5>Doctor appintenment</h5>
           <p>Your go-to platform for all things books! Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi modi consequuntur quam, repellat iste optio reiciendis eligendi unde qui repellendus natus cumque quas architecto vero id. Nostrum neque harum aliquid!
           </p>
         </div>

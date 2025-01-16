@@ -10,7 +10,7 @@ const TopMenu = () => {
       <Navbar bg="dark" variant="dark" expand="lg" style={{ padding: "15px" }}>
         <Container>
           <Navbar.Brand as={Link} to="/" style={{ fontWeight: "bold", fontSize: "1.5rem" }}>
-            📚 BOOK SELL
+            🧑‍⚕️Doctor🩺
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

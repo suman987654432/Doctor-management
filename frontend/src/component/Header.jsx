@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <>
       <h1 className="header-title">
-        BOOK <span>MANAGEMENT</span> SYSTEM
+        DOCTOR <span>APPOINTENMENT</span> SYSTEM
       </h1>
       {/* <Carousel /> */}
     </>

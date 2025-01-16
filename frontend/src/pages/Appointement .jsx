@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import '../css/book.css';  // Import the updated CSS file
+import '../css/book.css';
 
 const Appointment = () => {
   const { state } = useLocation();
@@ -24,13 +24,13 @@ const Appointment = () => {
 
         {/* Right side: Doctor's Details */}
         <div className="appointment-details">
-          <h1 className="appointment-header">Book Appointement with Dr. {doctor.doctor_name}</h1>
+          <h1 className="appointment-header">Book Appointment with Dr. {doctor.doctor_name}</h1>
           
           <p><strong>Specialist:</strong> {doctor.specialist}</p>
           <p><strong>Date:</strong> {new Date(doctor.date).toLocaleDateString()}</p>
           <p><strong>Fee:</strong> ₹{doctor.fee}</p>
 
-          
+          {/* <button className="book-appointment-btn">Book Appointment</button> */}
         </div>
       </div>
     </div>
@@ -38,3 +38,4 @@ const Appointment = () => {
 };
 
 export default Appointment;
+
