@@ -34,7 +34,7 @@ const Dashboard = () => {
             {/* Sidebar */}
             <div className="sidebar">
                 <div className="sidebar-brand">
-                    <h2>📚 BOOK SELL</h2>
+                    <h2>  🧑‍⚕️Doctor🩺</h2>
                 </div>
                 <ul className="sidebar-menu">
                     <li>
@@ -95,7 +95,7 @@ const Dashboard = () => {
                     )}
                 </header>
                 <main>
-                    <h1>Welcome to the Dashboard</h1>
+                    <h1>Welcome to the Doctor Appointemenet</h1>
 
                     {/* <img className="suman" style={{ height: "80vh", width: "100%" }} src={image} alt="" /> */}
                     <Outlet />
